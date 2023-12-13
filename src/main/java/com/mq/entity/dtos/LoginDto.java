@@ -1,4 +1,4 @@
-package com.mq.dtos;
+package com.mq.entity.dtos;
 
 import lombok.Data;
 

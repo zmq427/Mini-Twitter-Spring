@@ -21,6 +21,9 @@ public class ApUserFollow implements Serializable {
     @TableField("follow_id")
     private Long followId;
 
+    @TableField("follow_name")
+    private String followName;
+
     @TableField("level")
     private Short level;
 

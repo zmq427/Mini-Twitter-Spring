@@ -5,13 +5,17 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.math.BigInteger;
 import java.util.Date;
-
-@TableName("ap_article")
+@Document(indexName = "ap_tweet", shards = 6, replicas = 3)
+@TableName("ap_tweet")
 @Data
 public class ApTweet {
+    @Id
     @TableId(value = "id", type = IdType.AUTO)
     private BigInteger id;
     
@@ -20,6 +24,9 @@ public class ApTweet {
     
     @TableField("author_name")
     private String authorName;
+
+    @TableField("content")
+    private String content;
 
     @TableField("channel_id")
     private Long channelId;
@@ -54,8 +61,8 @@ public class ApTweet {
     @TableField("created_time")
     private Date createdTime;
 
-    @TableField("published_time")
-    private Date publishedTime;
+    @TableField("publish_time")
+    private Date publishTime;
 
     @TableField("sync_status")
     private Short syncStatus;

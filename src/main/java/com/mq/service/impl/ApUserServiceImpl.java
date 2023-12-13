@@ -3,11 +3,12 @@ package com.mq.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mq.common.R;
-import com.mq.dtos.LoginDto;
-import com.mq.dtos.RegisterDto;
+import com.mq.entity.dtos.LoginDto;
+import com.mq.entity.dtos.RegisterDto;
 import com.mq.entity.ApUser;
 import com.mq.mapper.ApUserMapper;
 import com.mq.service.ApUserService;
+import com.mq.utils.AppJwtUtil;
 import com.mq.utils.SaltUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -33,7 +34,8 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
             return R.error("密码错误");
         }
         apUser.setPassword("");
-        return R.success(apUser);
+
+        return R.success(apUser).add("token", AppJwtUtil.getToken(Long.valueOf(apUser.getId())));
     }
 
     @Override
@@ -54,5 +56,11 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
         save(newApUser);
         newApUser.setPassword("");
         return R.success(newApUser);
+    }
+
+    @Override
+    public ApUser selectUserById(Long userId) {
+        ApUser apUser = getOne(Wrappers.<ApUser>lambdaQuery().eq(ApUser::getId, userId));
+        return apUser;
     }
 }

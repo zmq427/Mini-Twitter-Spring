@@ -1,14 +1,12 @@
 package com.mq.controller;
 
 import com.mq.common.R;
-import com.mq.dtos.LoginDto;
-import com.mq.dtos.RegisterDto;
+import com.mq.entity.dtos.LoginDto;
+import com.mq.entity.dtos.RegisterDto;
 import com.mq.service.ApUserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
